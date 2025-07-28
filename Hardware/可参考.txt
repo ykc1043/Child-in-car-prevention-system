@@ -1,0 +1,6 @@
+ATGM336H程序电路
+https://oshwhub.com/vrxiaojie/treasure-box-based-on-stm32h743
+esp8266最小系统
+https://oshwhub.com/Pluto_1/ESP8266zui-xiao-ji-tong-ban
+
+https://oshwhub.com/steve-don/air-quality-monitoring-esp32-air
