@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}地图{% endblock %}
+{% block content %}
+<div class="container my-3">
+  <h1 class="text-center">地图</h1>
+  <p id="user-coordinates" class="text-center">正在获取您的位置信息...</p>
+  <p id="warning-msg" class="text-center text-danger"></p>
+</div>
+<div id="container"></div>
+{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+  <style>
+    html, body, #container {
+        height: 100%;
+        width: 100%;
+    }
+    .amap-icon img {
+        width: 25px;
+        height: 34px;
+    }
+    .amap-marker-label {
+        border: 0;
+        background-color: transparent;
+    }
+    .info {
+        position: relative;
+        top: 0;
+        right: 0;
+        min-width: 0;
+    }
+  </style>
+{% endblock %}
+{% block scripts %}
+  <!-- 引入高德地图 API -->
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=35b23add63ce24bcca064d99d802ccad"></script>
+  <script type="text/javascript">
+    // 从 URL 中获取经纬度参数（默认值：113.66154, 34.749252）
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) { return pair[1]; }
+        }
+        return null;
+    }
+    var lng = getQueryVariable("lng") || "113.66154";
+    var lat = getQueryVariable("lat") || "34.749252";
+    lng = parseFloat(lng);
+    lat = parseFloat(lat);
+    
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        center: [lng, lat],
+        zoom: 13
+    });
+    
+    // 设置服务器传来的位置标注
+    var marker = new AMap.Marker({
+        position: [lng, lat],
+        icon: 'https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+        offset: new AMap.Pixel(-13, -30)
+    });
+    marker.setMap(map);
+    marker.setLabel({
+        offset: new AMap.Pixel(10, 10),
+        content: "<div class='info'>设备位置</div>",
+        direction: 'right'
+    });
+    
+    // 检查是否在安全上下文中（HTTPS 或 localhost）
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+      document.getElementById("warning-msg").textContent =
+        "注意：当前连接不安全，地理定位功能可能无法正常工作。请使用 HTTPS 或 localhost 测试。";
+    }
+    
+    // 通过浏览器 API 获取用户当前位置并显示
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var userLng = position.coords.longitude;
+            var userLat = position.coords.latitude;
+            // 在页面上显示用户经纬度（保留6位小数）
+            document.getElementById("user-coordinates").textContent =
+              "您的当前位置: 经度 " + userLng.toFixed(6) + ", 纬度 " + userLat.toFixed(6);
+            // 添加用户位置标注
+            var userMarker = new AMap.Marker({
+                position: [userLng, userLat],
+                icon: 'https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
+                offset: new AMap.Pixel(-13, -30)
+            });
+            userMarker.setMap(map);
+            userMarker.setLabel({
+                offset: new AMap.Pixel(10, 10),
+                content: "<div class='info'>您的当前位置</div>",
+                direction: 'right'
+            });
+        }, function(error) {
+            console.warn("获取地理位置失败：", error.message);
+            document.getElementById("user-coordinates").textContent = "无法获取您的位置信息";
+        });
+    } else {
+        console.warn("浏览器不支持地理定位");
+        document.getElementById("user-coordinates").textContent = "浏览器不支持地理定位";
+    }
+  </script>
+{% endblock %}

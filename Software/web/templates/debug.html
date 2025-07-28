@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}调试页面{% endblock %}
+{% block content %}
+<div class="container my-4">
+  <h1 class="text-center mb-4">调试页面</h1>
+  <div class="mb-3">
+    <strong>MQTT 状态:</strong> <span id="connection-status" class="badge badge-secondary">未知</span>
+  </div>
+  
+  <!-- 接收信息区域 -->
+  <div class="card mb-4">
+    <div class="card-header">接收信息 (订阅 RX)</div>
+    <div class="card-body">
+      <div class="form-row mb-3">
+        <!-- 编码选择 -->
+        <div class="col-md-3 col-sm-6">
+          <label>编码:</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rx_encoding" value="utf8" id="rx_encoding_utf8" checked>
+            <label class="form-check-label" for="rx_encoding_utf8">UTF8</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rx_encoding" value="gbk" id="rx_encoding_gbk">
+            <label class="form-check-label" for="rx_encoding_gbk">GBK</label>
+          </div>
+        </div>
+        <!-- 格式选择 -->
+        <div class="col-md-3 col-sm-6">
+          <label>格式:</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rx_mode" value="string" id="rx_mode_string" checked>
+            <label class="form-check-label" for="rx_mode_string">字符串</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rx_mode" value="hex" id="rx_mode_hex">
+            <label class="form-check-label" for="rx_mode_hex">Hex</label>
+          </div>
+        </div>
+        <!-- 时间戳显示 -->
+        <div class="col-md-3 col-sm-6">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rx_timestamp">
+            <label class="form-check-label" for="rx_timestamp">显示时间戳</label>
+          </div>
+        </div>
+        <!-- 清除按钮 -->
+        <div class="col-md-3 col-sm-6 text-right">
+          <button class="btn btn-outline-danger" id="clear-button">清除</button>
+        </div>
+      </div>
+      <textarea id="rx-box" class="form-control" rows="8" readonly></textarea>
+    </div>
+  </div>
+  
+  <!-- 发送消息区域 -->
+  <div class="card mb-4">
+    <div class="card-header">发送消息 (发布 TX)</div>
+    <div class="card-body">
+      <div class="form-row mb-3">
+        <!-- 编码选择 -->
+        <div class="col-md-3 col-sm-6">
+          <label>编码:</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tx_encoding" value="utf8" id="tx_encoding_utf8" checked>
+            <label class="form-check-label" for="tx_encoding_utf8">UTF8</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tx_encoding" value="gbk" id="tx_encoding_gbk">
+            <label class="form-check-label" for="tx_encoding_gbk">GBK</label>
+          </div>
+        </div>
+        <!-- 格式选择 -->
+        <div class="col-md-3 col-sm-6">
+          <label>格式:</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tx_mode" value="string" id="tx_mode_string" checked>
+            <label class="form-check-label" for="tx_mode_string">字符串</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tx_mode" value="hex" id="tx_mode_hex">
+            <label class="form-check-label" for="tx_mode_hex">Hex</label>
+          </div>
+        </div>
+      </div>
+      <textarea id="tx-box" class="form-control" rows="4"></textarea>
+      <div class="text-right mt-2">
+        <button class="btn btn-primary" id="send-button">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/debug.js') }}"></script>
+{% endblock %}

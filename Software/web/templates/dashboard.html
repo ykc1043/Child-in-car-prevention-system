@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container my-4">
+  <h1 class="text-center mb-2">Dashboard</h1>
+  <!-- 状态信息：左侧为Web服务状态(S)，右侧为数据状态(D)，后跟最后更新 -->
+  <p class="text-center" style="font-size:12px;">
+    <span id="status-web" style="display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; border-radius:50%; color:#fff; margin-right:5px; background-color: green;">S</span>
+    <span id="status-data" style="display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; border-radius:50%; color:#fff; margin-right:10px; background-color: green;">D</span>
+    最后更新: <span id="update-time">--</span>
+  </p>
+  <div class="row">
+    <!-- 卡片1：温度 & 湿度 -->
+    <div class="col-md-6 mb-3">
+      <div class="card" id="card-temphum" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">温度 & 湿度</h5>
+          <p class="card-text" id="temphum-display">-- °C, -- %</p>
+          <small class="text-muted">点击查看历史变化</small>
+        </div>
+      </div>
+    </div>
+    <!-- 卡片2：CO2 & TVOC -->
+    <div class="col-md-6 mb-3">
+      <div class="card" id="card-co2tvoc" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">CO2 & TVOC</h5>
+          <p class="card-text" id="co2tvoc-display">-- ppm, -- ppb</p>
+          <small class="text-muted">点击查看历史变化</small>
+        </div>
+      </div>
+    </div>
+    <!-- 卡片3：当前位置 -->
+    <div class="col-md-12 mb-3">
+      <div class="card" id="card-geo" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">当前位置</h5>
+          <p class="card-text" id="geo-display">经度: --, 纬度: --</p>
+          <small class="text-muted">点击查看地图</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 温度湿度历史趋势图 Modal -->
+<div class="modal fade" id="modal-temphum" tabindex="-1" role="dialog" aria-labelledby="modalTemphumLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTemphumLabel">温度 & 湿度历史趋势</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:400px;">
+        <canvas id="chart-temphum"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CO2 & TVOC 历史趋势图 Modal -->
+<div class="modal fade" id="modal-co2tvoc" tabindex="-1" role="dialog" aria-labelledby="modalCo2TvocLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCo2TvocLabel">CO2 & TVOC 历史趋势</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="height:400px;">
+        <canvas id="chart-co2tvoc"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+  {{ super() }}
+  <!-- 引入 Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

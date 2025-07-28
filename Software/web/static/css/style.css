@@ -1,0 +1,19 @@
+/* static/css/style.css */
+
+body {
+    padding-bottom: 70px; /* 为底部导航留出空间 */
+    background-color: #f8f9fa;
+  }
+  
+  /* 禁止 textarea 大小调整 */
+  textarea {
+    resize: none;
+  }
+  
+  /* 针对小屏幕的额外样式 */
+  @media (max-width: 576px) {
+    .form-row > div {
+      margin-bottom: 10px;
+    }
+  }
+  
