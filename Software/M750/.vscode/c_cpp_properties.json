@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Core/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+                "${workspaceFolder}/Drivers/CMSIS/DSP/Include"
+            ],
+            "defines": [
+                "STM32H750VB",       
+                "USE_HAL_DRIVER",  
+                "__ARM_ARCH_7EM__",   
+                "DEBUG"
+            ],
+
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"    
+        }
+    ],
+    "version": 4
+}

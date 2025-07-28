@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "lv_demo_benchmark.h": "c",
+        "lv_demos.h": "c",
+        "math.h": "c",
+        "tim.h": "c",
+        "main.h": "c",
+        "onenet.h": "c",
+        "system_error": "c"
+    }
+}
