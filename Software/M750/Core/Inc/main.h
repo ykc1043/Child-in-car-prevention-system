@@ -36,22 +36,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-typedef struct
-{
-	uint8_t UTCTime[15];
-	uint32_t UTCTime_int;
-	uint8_t UsefulFlag;
-	uint8_t latitude[15];
-	float latitude_d;
-	char N_S;
-	uint8_t longitude[15];
-	float longitude_d;
-	char E_W;
-	uint8_t speed[10];
-	float speed_d;
-} GPS_Data;
-extern GPS_Data gps;
-
 
 /* USER CODE END ET */
 
@@ -73,12 +57,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define IIC_SDA_Pin GPIO_PIN_14
-#define IIC_SDA_GPIO_Port GPIOD
-#define IIC_SCL_Pin GPIO_PIN_8
-#define IIC_SCL_GPIO_Port GPIOA
-#define FAN_Pin GPIO_PIN_7
-#define FAN_GPIO_Port GPIOD
 
 /* USER CODE BEGIN Private defines */
 

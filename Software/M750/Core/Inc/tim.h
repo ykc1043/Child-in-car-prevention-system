@@ -44,8 +44,6 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* USER CODE BEGIN Prototypes */
 
-void Beep_Enable(void);  // �?启蜂鸣器
-void Beep_Disable(void); // 关闭蜂鸣�?
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

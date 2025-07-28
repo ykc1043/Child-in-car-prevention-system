@@ -32,33 +32,16 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern UART_HandleTypeDef huart4;
-
-extern UART_HandleTypeDef huart7;
-
-extern UART_HandleTypeDef huart8;
-
 extern UART_HandleTypeDef huart1;
 
-extern UART_HandleTypeDef huart3;
-
 /* USER CODE BEGIN Private defines */
-#define REC_LENGTH  1
-#define MAX_REC_LENGTH  4000 
+
 /* USER CODE END Private defines */
 
-void MX_UART4_Init(void);
-void MX_UART7_Init(void);
-void MX_UART8_Init(void);
 void MX_USART1_UART_Init(void);
-void MX_USART3_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-extern uint8_t UART4_Rx_flg; 
-extern uint16_t  UART4_Rx_cnt;
-extern uint8_t UART4_temp[REC_LENGTH]; 
 
-void USART_Printf(UART_HandleTypeDef *huart, char *format, ...);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

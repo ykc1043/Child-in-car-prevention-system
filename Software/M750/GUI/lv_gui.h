@@ -13,7 +13,7 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
-#include "main.h"
+
 /*********************
  *      DEFINES
  *********************/
@@ -26,8 +26,7 @@ extern "C" {
  * GLOBAL PROTOTYPES
  **********************/
 void lv_gui(void);
-void lv_gui_start(void);
-void lv_gui_activic_system(uint32_t uid0,uint32_t uid1,uint32_t uid2);
+
 /**********************
  *      MACROS
  **********************/
