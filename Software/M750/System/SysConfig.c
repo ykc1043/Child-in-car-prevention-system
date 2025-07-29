@@ -1,5 +1,6 @@
 #include "stm32h7xx_hal.h"
 #include "SysConfig.h"  
+#include "stdio.h"
 #define LCD_MemoryAdd   	0x24000000 		//	显存的起始地址  
 /**
   * @brief 关闭并清除所有中断
@@ -174,5 +175,28 @@ void LtdcClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+void MeasureLoopFrequency(void)
+{
+    static uint32_t loop_count = 0;        // 记录循环次数
+    static uint32_t last_tick = 0;        // 上次测量的时间点
+
+    loop_count++;                         // 增加循环计数
+    uint32_t current_tick = HAL_GetTick(); // 获取当前时间（单位：ms）
+    // 检查是否已过1秒
+    if ((current_tick - last_tick) >= 1000)
+    {
+        uint32_t frequency = loop_count;  // 计算频率
+        loop_count = 0;                   // 重新计数
+        last_tick = current_tick;         // 更新上次测量时间
+	printf("%d ",current_tick);
+
+        // 打印频率（假设 USART1 已初始化）
+        char message[50];
+        snprintf(message, sizeof(message), "Loop Frequency: %lu Hz\r\n", frequency);
+        
+		printf("%s",message);
+    }
 }
 

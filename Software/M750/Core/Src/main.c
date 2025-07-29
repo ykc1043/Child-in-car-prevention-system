@@ -41,6 +41,9 @@
 #if 1
 	#include "led.h"
 	#include "key.h"
+//	#include "dht11.h"
+	#include "myiic.h"
+	#include "sgp30.h"
 	#include "lcd_rgb.h"
 	#include "lcd_pwm.h"
 	#include "touch_800x480.h"
@@ -49,9 +52,9 @@
 	#include "lvgl.h"
 	#include "lv_port_disp_template.h"
 	#include "lv_port_indev_template.h"
-	#include "lv_demo_benchmark.h"
+//	#include "lv_demo_benchmark.h"
 	#include "lv_gui.h"
-
+	//#include ".h"
 
 #endif
 
@@ -76,6 +79,7 @@
 
 /* USER CODE BEGIN PV */
 uint8_t Buffer[1];
+uint8_t DHT11_BUF[2]={0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -86,28 +90,28 @@ void MPU_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void MeasureLoopFrequency(void)
-{
-    static uint32_t loop_count = 0;        // 记录循环次数
-    static uint32_t last_tick = 0;        // 上次测量的时间点
+void print_serial_id() {
+    uint8_t id[6];  // 用于存储序列号
+    int result;
 
-    loop_count++;                         // 增加循环计数
-    uint32_t current_tick = HAL_GetTick(); // 获取当前时间（单位：ms）
-    // 检查是否已过1秒
-    if ((current_tick - last_tick) >= 1000)
-    {
-        uint32_t frequency = loop_count;  // 计算频率
-        loop_count = 0;                   // 重新计数
-        last_tick = current_tick;         // 更新上次测量时间
-	printf("%d ",current_tick);
+    // 调用函数获取序列号
+    result = sgp30_get_serial_id(id);
 
-        // 打印频率（假设 USART1 已初始化）
-        char message[50];
-        snprintf(message, sizeof(message), "Loop Frequency: %lu Hz\r\n", frequency);
-        
-		printf("%s",message);
+    // 检查函数返回值并打印结果
+    if (result == 0) {
+        printf("SGP30 Serial ID: ");
+        for (int i = 0; i < 6; i++) {
+            printf("%02X", id[i]);
+            if (i < 5) {
+                printf("-");
+            }
+        }
+        printf("\n");
+    } else {
+        printf("Error: Failed to get serial ID. Error code: %d\n", result);
     }
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -118,9 +122,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-//#ifdef EXT_Flash_SPI
-//  CInitNVIC();
-//#endif
+
 	MPU_Config();
 	SCB_EnableICache();		// 使能ICache
 	SCB_EnableDCache();		// 使能DCache
@@ -149,10 +151,20 @@ int main(void)
 //  MX_LTDC_Init();
 //  MX_DMA2D_Init();
   MX_TIM4_Init();
+  MX_UART7_Init();
+  MX_USART3_UART_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
+  HAL_UART_Receive_IT(&huart1, (uint8_t *)Buffer, 1);
+  HAL_UART_Receive_IT(&huart7, (uint8_t *)Buffer, 1);
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)Buffer, 1);
+  HAL_UART_Receive_IT(&huart4, (uint8_t *)Buffer, 1);
 	LED_Init();					// 初始化LED引脚
 	KEY_Init();					// 初始化按键引脚
-	
+//	DHT11_Init();
+	IIC_Init();
+	IIC_Scan_Devices();
+	sgp30_init();
 
 	MX_LTDC_Init();			// LTDC以及层初始化 
 //	LCD_PWMinit(40);			// 背光引脚PWM初始化，占空比40%
@@ -165,6 +177,8 @@ int main(void)
 	
 //	lv_demo_benchmark();    // 运行官方例程
 	lv_gui();
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -172,13 +186,19 @@ int main(void)
   while (1)
   {
 //		MeasureLoopFrequency();
+
+//		DHT11_ReadData(DHT11_BUF);
+//		printf("%d %d\r\n",DHT11_BUF[0],DHT11_BUF[1]);
 		
-	
+//		float temperature,humidity;
+//	  
+//		SHT40_Read_RHData(&temperature,&humidity);
+//		printf("%f %f \r\n",temperature,humidity);
 		lv_task_handler();	// LVGL进程
 		Touch_Scan();			// 触摸扫描
 		LED1_Toggle;			// LED指示
-		HAL_Delay(15);			// GT911触摸屏扫描间隔不能小于10ms
-		
+		HAL_Delay(10);			// GT911触摸屏扫描间隔不能小于10ms
+
 //	  if(KEY_Scan()==KEY_ON){printf("KEY_ON\r\n");LCD_PwmSetPulse(20);LCD_SetBackColor(152);LCD_Clear();}
 
 //		HAL_Delay(20);		

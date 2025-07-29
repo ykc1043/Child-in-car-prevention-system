@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>0</RunUserProg2>
+            <RunUserProg2>1</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -1087,16 +1087,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>System</GroupName>
-          <Files>
-            <File>
-              <FileName>SysConfig.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\SysConfig.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Drivers/User</GroupName>
           <Files>
             <File>
@@ -1138,6 +1128,41 @@
               <FileName>touch_iic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\User\Src\touch_iic.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>DHT11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\DHT11.c</FilePath>
+            </File>
+            <File>
+              <FileName>myiic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\myiic.c</FilePath>
+            </File>
+            <File>
+              <FileName>sgp30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\sgp30.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>System</GroupName>
+          <Files>
+            <File>
+              <FileName>SysConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\SysConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\delay.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1988,53 +2013,6 @@
         </Group>
         <Group>
           <GroupName>LVGL_Demo</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_demo_benchmark.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\lv_demo_benchmark.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>GUI</GroupName>
@@ -2395,7 +2373,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx,EXT_Flash_SPI</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\System;..\Drivers\User\Inc;..\LVGL;..\LVGL\porting;..\LVGL\src;..\LVGL\src\core;..\LVGL\src\draw;..\LVGL\src\draw\nxp_pxp;..\LVGL\src\draw\nxp_vglite;..\LVGL\src\draw\sdl;..\LVGL\src\draw\stm32_dma2d;..\LVGL\src\draw\sw;..\LVGL\src\extra;..\LVGL\src\extra\layouts;..\LVGL\src\extra\layouts\flex;..\LVGL\src\extra\layouts\grid;..\LVGL\src\extra\libs;..\LVGL\src\extra\libs\bmp;..\LVGL\src\extra\libs\ffmpeg;..\LVGL\src\extra\libs\freetype;..\LVGL\src\extra\libs\fsdrv;..\LVGL\src\extra\libs\gif;..\LVGL\src\extra\libs\png;..\LVGL\src\extra\libs\qrcode;..\LVGL\src\extra\libs\rlottie;..\LVGL\src\extra\libs\sjpg;..\LVGL\src\extra\others;..\LVGL\src\extra\others\gridnav;..\LVGL\src\extra\others\monkey;..\LVGL\src\extra\others\snapshot;..\LVGL\src\extra\themes;..\LVGL\src\extra\themes\basic;..\LVGL\src\extra\themes\default;..\LVGL\src\extra\themes\mono;..\LVGL\src\extra\widgets;..\LVGL\src\extra\widgets\animimg;..\LVGL\src\extra\widgets\calendar;..\LVGL\src\extra\widgets\chart;..\LVGL\src\extra\widgets\colorwheel;..\LVGL\src\extra\widgets\imgbtn;..\LVGL\src\extra\widgets\keyboard;..\LVGL\src\extra\widgets\led;..\LVGL\src\extra\widgets\list;..\LVGL\src\extra\widgets\menu;..\LVGL\src\extra\widgets\meter;..\LVGL\src\extra\widgets\msgbox;..\LVGL\src\extra\widgets\span;..\LVGL\src\extra\widgets\spinbox;..\LVGL\src\extra\widgets\spinner;..\LVGL\src\extra\widgets\tabview;..\LVGL\src\extra\widgets\tileview;..\LVGL\src\extra\widgets\win;..\LVGL\src\font;..\LVGL\src\hal;..\LVGL\src\misc;..\LVGL\src\widgets;..\LVGL\demos;..\LVGL\demos\benchmark;..\GUI</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\System;..\Drivers\User\Inc;..\Drivers\Hardware;..\LVGL;..\LVGL\porting;..\LVGL\src;..\LVGL\src\core;..\LVGL\src\draw;..\LVGL\src\draw\nxp_pxp;..\LVGL\src\draw\nxp_vglite;..\LVGL\src\draw\sdl;..\LVGL\src\draw\stm32_dma2d;..\LVGL\src\draw\sw;..\LVGL\src\extra;..\LVGL\src\extra\layouts;..\LVGL\src\extra\layouts\flex;..\LVGL\src\extra\layouts\grid;..\LVGL\src\extra\libs;..\LVGL\src\extra\libs\bmp;..\LVGL\src\extra\libs\ffmpeg;..\LVGL\src\extra\libs\freetype;..\LVGL\src\extra\libs\fsdrv;..\LVGL\src\extra\libs\gif;..\LVGL\src\extra\libs\png;..\LVGL\src\extra\libs\qrcode;..\LVGL\src\extra\libs\rlottie;..\LVGL\src\extra\libs\sjpg;..\LVGL\src\extra\others;..\LVGL\src\extra\others\gridnav;..\LVGL\src\extra\others\monkey;..\LVGL\src\extra\others\snapshot;..\LVGL\src\extra\themes;..\LVGL\src\extra\themes\basic;..\LVGL\src\extra\themes\default;..\LVGL\src\extra\themes\mono;..\LVGL\src\extra\widgets;..\LVGL\src\extra\widgets\animimg;..\LVGL\src\extra\widgets\calendar;..\LVGL\src\extra\widgets\chart;..\LVGL\src\extra\widgets\colorwheel;..\LVGL\src\extra\widgets\imgbtn;..\LVGL\src\extra\widgets\keyboard;..\LVGL\src\extra\widgets\led;..\LVGL\src\extra\widgets\list;..\LVGL\src\extra\widgets\menu;..\LVGL\src\extra\widgets\meter;..\LVGL\src\extra\widgets\msgbox;..\LVGL\src\extra\widgets\span;..\LVGL\src\extra\widgets\spinbox;..\LVGL\src\extra\widgets\spinner;..\LVGL\src\extra\widgets\tabview;..\LVGL\src\extra\widgets\tileview;..\LVGL\src\extra\widgets\win;..\LVGL\src\font;..\LVGL\src\hal;..\LVGL\src\misc;..\LVGL\src\widgets;..\LVGL\demos;..\LVGL\demos\benchmark;..\GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2632,16 +2610,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>System</GroupName>
-          <Files>
-            <File>
-              <FileName>SysConfig.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\SysConfig.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Drivers/User</GroupName>
           <Files>
             <File>
@@ -2683,6 +2651,41 @@
               <FileName>touch_iic.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\User\Src\touch_iic.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drivers/Hardware</GroupName>
+          <Files>
+            <File>
+              <FileName>DHT11.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\DHT11.c</FilePath>
+            </File>
+            <File>
+              <FileName>myiic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\myiic.c</FilePath>
+            </File>
+            <File>
+              <FileName>sgp30.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Hardware\sgp30.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>System</GroupName>
+          <Files>
+            <File>
+              <FileName>SysConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\SysConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\delay.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3533,53 +3536,6 @@
         </Group>
         <Group>
           <GroupName>LVGL_Demo</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_demo_benchmark.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\lv_demo_benchmark.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_alpha16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_alpha16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_argb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_argb.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_chroma_keyed.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_chroma_keyed.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_indexed16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_indexed16.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_benchmark_cogwheel_rgb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\img_benchmark_cogwheel_rgb.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_12_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_12_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_16_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_16_compr_az.c.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_font_bechmark_montserrat_28_compr_az.c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\LVGL\demos\benchmark\assets\lv_font_bechmark_montserrat_28_compr_az.c.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>GUI</GroupName>
